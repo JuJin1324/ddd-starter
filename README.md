@@ -266,7 +266,94 @@
 > 
 
 ### Clean 아키텍처
+> 소프트웨어의 각 계층을 분리하여 의존성을 최소화하고 테스트 용이성을 향상시키는 것을 목표로한다.  
+> Clean Architecture에 대해서 이해하기 위해선 두 가지 개념을 이해하고 있어야 합니다.  
+> * Business Rule
+> * System Architecture
 > 
+> **What is Business Rule?**  
+> Business Rule(Logic)은 컴퓨터 프로그램에서 데이터를 생성, 표시, 저장, 변경하는 부분을 일컫습니다. (=domain logic)
+> Business Rule(Logic)은 유저의 입력(UI)과 DB 사이에서 발생한 정보 교환을 위한 특정 알고리즘이나 규칙이 정의된 tier 를 의미합니다.  
+> 이러한 Rule(Logic)은 고객의 요구에 따라 변경될 수 있기 때문에 별도의 tier 에 배치되어야 합니다. 만약 다른 역할을 하는 tier와 함께 존재한다면, 
+> 고객의 요구에 따라 변경해야하는 부분이 많아질 수 밖에 없기 때문입니다.  
+> 
+> **What is System Architecture?**  
+> System Architecture는 시스템의 구조(structure), 행위(behavior), 뷰(views)를 정의하는 개념적인 모델입니다.  
+> 즉, 시스템의 목적을 달성하기 위해 각 컴포넌트가 어떻게 상호작용하고 정보가 어떻게 교환되는 지를 정의하고 있습니다.  
+> 세상에는 정말 다양한 시스템 아키텍처들이 나왔지만 결국 그들의 목적은 하나로 귀결됩니다: 관심사의 분리  
+> 
+> **관심사의 분리**  
+> 소프트웨어를 계층으로 나누게 되면 관심사를 분리할 수 있습니다. 그리고 관심사 분리에 목적을 가진 시스템 아키텍처는 최종적으로 다음과 같은 구조를 지니게 됩니다.  
+> 프레임워크 독립적: 라이브러리 존재 여부나 프레임워크에 한정적이지 않아 도구로써 사용하는 것이 가능합니다.  
+> 테스트 용이: Business Rule은 UI, DB, Web Server 등 기타 외부 요인과 관계없이 테스트 가능합니다.  
+> UI 독립적: 시스템의 다른 부분을 고려하지 않고 UI를 변경할 수 있습니다.  
+> Database 독립적: Business Rule에 얽매이지 않고 Database를 독립적으로 변경할 수 있습니다(SQL, Mongo, CouchDB 등)  
+> 외부 기능 독립적: Business Rule은 외부 상황(DB, UI)이 변하더라도 영향을 받지 않습니다.  
+>
+> **Domain**  
+> Domain Layer는 Business Rule이 존재하는 영역입니다. 번역앱은 번역을 하고, 결제 앱은 결제를 수행합니다. 
+> 이렇듯 비즈니스의 본질은 쉽게 바뀌지 않으므로 Business Rule은 잘 변하지 않는 안정된 영역입니다.  
+> 
+> **Infrastructure**  
+> Infrastructure Layer는 UI, Database, Web APIs, Frameworks 등이 존재하는 영역입니다. 이는 Domain에 비하여 자주, 쉽게 바뀔 수 있습니다. 
+> 예를 들어 다른 사용자에게 송금을 한다고 가정해봅시다. 송금을 위한 버튼의 형태는 쉽게 바뀔 수 있지만 송금 방법 (Business Rule)은 그렇지 않습니다.  
+> Uncle Bob은 이렇게 경계를 두어 각 Layer를 분리하고, 관심사를 분리하는 규칙을 의존성 규칙(Dependency Rule)으로 설명했습니다.  
+> 
+> **Dependency Rule**  
+> 모든 소스코드 의존성은 반드시 outer(저수준) 에서 inner(고수준) 로, 고수준 정책을 향해야 한다.  
+> Dependency Rule은 Business Logic을 담당하는 코드들이 DB 또는 Web 같이 구체적인 세부사항에 의존하지 않고 독립적으로 실행되어야 한다는 규칙입니다.  
+> Dependency Rule에 따르면 inner circle에 해당하는 Domain은 outer circle에 해당하는 Infrastructure에 대해서 아무것도 모릅니다. 
+> 이는 UI, DB는 Business Rule에 의존하지만 Business Rule은 그렇지 않다는 것을 의미합니다.  
+> UI가 웹이건 모바일이건, DB가 SQL이건 NoSQL이건 Business Rule 입장에선 아무런 관계가 없습니다.  
+> Domain이 Entities, Use Cases로 세분화 되었고, Adapter가 새로 생겨 Domain과 Infrastructure 사이의 경계를 관리합니다.  
+> Dependency Rule에 따라 동작하여 outer에서 inner로 의존성을 가지게 됩니다.  
+> 
+> **Entity**  
+> Entity는 애플리케이션에서 핵심적인 기능인 Business Rule을 담고 있습니다.  
+> 다른 사람에게 돈을 보내는데, 같은 은행으로 보내면 수수료가 면제된다고 가정해 보겠습니다. 
+> 모바일 앱에서 돈을 보내던 PC 웹에서 돈을 보내던 같은 은행으로 보내면 수수료가 면제된다는 사실은 변하지 않습니다.  
+> 같은 은행이면 수수료가 면제된다는 규칙(Business Rule)은 외부 상황(outer layer)을 전혀 모릅니다.  
+> 즉, Entity들은 outer layer들에 속한 다른 class나 component들을 전혀 모르고 신경쓰지 않아도 됩니다.  
+> 
+> **Use cases**  
+> Use cases는 특정 application에 대한 Business Rule입니다. Use cases는 시스템이 어떻게 자동화 될 것인지에 대해 정의하고 application의 행위를 결정합니다. 
+> 다시 말해, 프로젝트 레벨의 Business Rules(Entities)을 사용하여 Use cases의 목적을 달성합니다.  
+> 계좌 송금을 하기 위한 Use cases의 예시는 다음과 같습니다.  
+> [계좌 송금]  
+> * 입력: 수취인 계좌번호, 수취인 은행, 송금 금액
+> * 출력: 송금 성공 여부
+> * 적용되는 Business Rule 
+> 계좌번호의 양식은 유효해야 한다.  
+> 해당 계좌가 돈을 수취할 수 있는 유효한 상태여야 한다.  
+> 송금 금액은 1회에 1천만원까지만 허용된다.  
+> ....
+> Use cases 는 Entities에 의존하는 동시에 상호작용합니다. 물론 outer layer에 대해서는 아는게 없습니다. 
+> 다만 이 계층에서는 outer layer에서 사용할 수 있는 abstract class나 interface를 정의합니다.  
+> 
+> **Adapters**  
+Adapters는 domain과 interfaces 사이의 번역기 역할을 수행합니다.
+> 예를 들어 GUI로부터 input data를 받아 Use cases와 Entities 에게 편리한 형태로 repackage 하고, 
+> Use cases와 Entities의 output을 가져와 GUI에 표시하거나 DB에 저장하기 편리한 형식으로 repackage 합니다.  
+> Adapters는 GUI의 MVC 아키텍처를 완전히 내포하며, `Presenter`, `View`, `Controller` 가 모두 여기에 속합니다.  
+>  
+> **Infrastructure**  
+> Infrastructure는 모든 I/O components(UI, DB, Frameworks, Devices)가 있는 영역입니다.  
+> 이는 변화될 가능성이 매우 높기 때문에 stable 한 domain과는 확실히 분리가 되어 있고, 그렇기 때문에 비교적 쉽게 변화되고 component 또한 쉽게 교환됩니다.  
+> 
+> **Conclusion**  
+> 결국 Clean Architecture는 다음과 같은 이점이 있다고 정의내립니다.  
+> * 의존성 규칙에 따름으로써 관심사가 분리된다.  
+> * 본질적으로 테스트하기 쉬운 시스템을 만들 수 있다.  
+> * 의존성 규칙이 가져오는 이점을 가져올 수 있다.  
+> * 그리고 주요한 이러한 특징을 지닙니다.  
+> 
+> 또한 같은 상황과 이유로 변경되는 Class들은 Components로 묶인다.
+> Business Rule은 stable한 components로, 변경되기 쉬운 외부의 infrastructure components (UI, DB, web, frameworks, ... )를 알지 못한다.
+> 각 components layer 간의 경계는 adapter 인터페이스를 통해 관리된다.
+> Adapter는 Layer 간의 데이터를 편한 형태로 변환시켜주고 더 stable한 inner components로 의존성을 가지도록 한다.
+>
+> **참조사이트**  
+> [Why DDD, Clean Architecture and Hexagonal ?](https://dataportal.kr/74)
 
 ---
 
