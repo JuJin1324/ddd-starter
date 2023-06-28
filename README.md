@@ -414,18 +414,11 @@ Adapters는 domain과 interfaces 사이의 번역기 역할을 수행합니다.
 > 단일 책임을 가짐으로써 외부 종속성을 고려할 필요 없이 도메인 개체를 발전시킬 수 있습니다. 이러한 발전 가능성은 도메인 주도 설계를 적용할 때 육각형 아키텍처 스타일을 
 > 완벽하게 만들어줍니다. 개발하는 동안 우리는 종속성의 자연스러운 흐름을 따릅니다: 우리는 도메인 개체에서 코딩을 시작하고 거기에서 바깥쪽으로 나아갑니다.  
 > 
-> **Use Cases**  
-> 우리는 유즈 케이스를 사용자가 우리 소프트웨어로 수행하는 작업에 대한 추상적인 설명으로 알고 있습니다. 육각형 아키텍처 스타일에서는 유즈 케이스를 코드베이스의 일급 시민으로 승격시키는 것이 맞습니다.  
-> 일급 객체(일급 시민)란 다른 객체들에 일반적으로 적용 가능한 연산을 모두 지원하는 객체를 가리킨다. 보통 함수에 인자로 넘기기, 수정하기, 변수에 대입하기와 같은 연산을 지원할 때 일급 객체라고 한다.    
-> 이러한 의미에서 유즈 케이스는 특정 유즈 케이스와 관련된 모든 것을 처리하는 클래스입니다.   
-> 예를 들어 셀메이트 글로벌에서 “사용자가 열설정을 등록” 유즈 케이스를 살펴보겠습니다.   
-> 사용자가 열설정을 등록하 고유한 API를 가지는 PresetUseCase 클래스를 만듭니다.   
-> 이 코드에는 유즈 케이스와 관련된 모든 비즈니스 규칙 검사와 로직이 포함되어 있으므로 도메인 개체 내에서 구현해서는 안됩니다.   
-> 그 외의 다른 모든 것은 도메인 개체에 위임됩니다(예를 들어 도메인 개체인 Preset이 있을 수 있습니다).   
-> 도메인 개체와 유사하게 유스 케이스 클래스는 외부 구성 요소에 대한 종속성이 없습니다. 육각형 외부에서 무언가가 필요할 때는 Outbound 포트를 만듭니다.  
+> **Use Cases**
+> [[Hexagonal Architecture] 헥사고날 아키텍처에서 유즈케이스(UserCase) 구현하기](https://velog.io/@msung99/Hexagonal-Architecture-%ED%97%A5%EC%82%AC%EA%B3%A0%EB%82%A0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EC%97%90%EC%84%9C-%EC%9C%A0%EC%A6%88%EC%BC%80%EC%9D%B4%EC%8A%A4UserCase-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
 > 
 > **Inbound and Outbound Ports**  
-> 도메인 개체 및 유즈 케이스는 육각형 내에 있습니다. 즉, 애플리케이션의 핵심 내에 있습니다. 외부와의 모든 통신은 전용 “포트"를 통해 이루어집니다.    
+> 도메인 개체 및 유즈 케이스는 육각형 내에 있습니다. 즉, 애플리케이션의 핵심 내에 있습니다. 외부와의 모든 통신은 전용 "포트"를 통해 이루어집니다.    
 > Inbound 포트는 외부 구성 요소에서 호출할 수 있고 유즈 케이스에 의해 구현되는 간단한 인터페이스입니다. 이러한 Inbound 포트를 호출하는 구성 요소를 Inbound 어댑터라고 합니다.    
 > Outbound 포트는 외부에서 무언가가 필요한 경우(예: 데이터베이스 액세스), 유즈 케이스에서 호출할 수 있는 간단한 인터페이스입니다.   
 > 이 인터페이스는 유즈 케이스의 요구 사항에 맞게 설계되었지만 Outbound 어댑터라고 하는 외부 구성 요소에 의해 구현됩니다.     
@@ -444,6 +437,8 @@ Adapters는 domain과 interfaces 사이의 번역기 역할을 수행합니다.
 > 어댑터는 크게 2종류로 구분됩니다.  
 > * Driving Adapter : 애플리케이션의 코어(도메인, 엔티티등) 을 호출하는 엔티티. 즉 웹 어댑터가 이에 해당합니다.  
 > * Driven Adapter : 애플리케이션에 의해 주도되는 어댑터들입니다. 즉 영속성 어댑터가 이에 해당하죠.  
+> 
+> [[Hexagonal Architecture] 헥사고날 아키텍처에서 인커밍 웹 어댑터(Adapter) 를 컨트롤러로 구현하기](https://velog.io/@msung99/Hexagonal-Architecture-%ED%97%A5%EC%82%AC%EA%B3%A0%EB%82%A0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EC%97%90%EC%84%9C-%EC%9D%B8%EC%BB%A4%EB%B0%8D-%EC%96%B4%EB%8C%91%ED%84%B0Adapter-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
 > 
 > **접근 제한자**  
 > 패키지의 수가 아주 많아진다는 것이 모든 것을 public 으로 만들어서 패키지 간의 접근을 허용해야 한다는 것은 아닐까? 걱정스럽다.  
@@ -490,11 +485,19 @@ Adapters는 domain과 interfaces 사이의 번역기 역할을 수행합니다.
 > 이 아키텍처는 도메인 모델을 요소들의 중심에 배치하기 때문에 정말 많은 효과를 볼 수 있을 겁니다.  
 > 
 > **참조사이트**  
-> [헥사고날(Hexagonal) 아키텍처란 무엇인가?!](https://jaehoney.tistory.com/313)  
-> [DDD + Hexagonal Architecture(WITH 글로벌 프로젝트)](http://dev.blog.sellmate.co.kr/post/%EA%B8%80%EB%A1%9C%EB%B2%8C-5%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%A6%AC%EB%B7%B0/)  
-> [스프링 코드로 이해하는 핵사고날 아키텍처](https://covenant.tistory.com/258)  
+> [헥사고날(Hexagonal) 아키텍처란 무엇인가?!](https://jaehoney.tistory.com/313)    
+> [DDD + Hexagonal Architecture(WITH 글로벌 프로젝트)](http://dev.blog.sellmate.co.kr/post/%EA%B8%80%EB%A1%9C%EB%B2%8C-5%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%A6%AC%EB%B7%B0/)    
+> [스프링 코드로 이해하는 핵사고날 아키텍처](https://covenant.tistory.com/258)    
+> [[Hexagonal Architecture] 헥사고날 아키텍처로 어떻게 유지.보수 가능한 소프트웨어를 개발할까?](https://velog.io/@msung99/Hexagonal-Architecture-%ED%97%A5%EC%82%AC%EA%B3%A0%EB%82%A0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EB%A1%9C-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9C%A0%EC%A7%80.%EB%B3%B4%EC%88%98-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%EB%A5%BC-%EA%B0%9C%EB%B0%9C%ED%95%A0%EA%B9%8C)  
+> [[Hexagonal Architecture] 헥사고날 아키텍처에서 유즈케이스(UserCase) 구현하기](https://velog.io/@msung99/Hexagonal-Architecture-%ED%97%A5%EC%82%AC%EA%B3%A0%EB%82%A0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EC%97%90%EC%84%9C-%EC%9C%A0%EC%A6%88%EC%BC%80%EC%9D%B4%EC%8A%A4UserCase-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)  
+  
 > 
-
+> TODO
+> [[Hexagonal Architecture] 헥사고날 아키텍처에서 인커밍 웹 어댑터(Adapter) 를 컨트롤러로 구현하기](https://velog.io/@msung99/Hexagonal-Architecture-%ED%97%A5%EC%82%AC%EA%B3%A0%EB%82%A0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EC%97%90%EC%84%9C-%EC%9D%B8%EC%BB%A4%EB%B0%8D-%EC%96%B4%EB%8C%91%ED%84%B0Adapter-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)    
+> [지속 가능한 소프트웨어 설계 패턴: 포트와 어댑터 아키텍처 적용하기](https://engineering.linecorp.com/ko/blog/port-and-adapter-architecture)    
+> [[Hexagonal Architecture] 1. 헥사고날 아키텍처란?](https://blog.jiniworld.me/176)    
+> [<Architecture> 헥사고날 아키텍처 구조로 변경해보기 예제](https://willbfine.tistory.com/599)    
+> [헥사고날 아키텍처(Hexagonal Architecture)](https://zkdlu.tistory.com/4)    
 
 ---
 
