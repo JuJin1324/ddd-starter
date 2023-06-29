@@ -202,9 +202,6 @@
 > -> 엑터 식별 (30분) -> 흐름 설명 (30분) -> 어그리게잇 식별(30분)   
 > -> 컨텍스트 경계 정의(30분) -> 정책 식별(30분) -> 컨텍스트 매핑 (30분)  
 
-### Event storming 이후 해야할 것
-> TODO
-
 ### 참조사이트
 > [마이크로서비스 모델링 ④ : 이벤트 스토밍을 통한 마이크로서비스 도출](https://engineering-skcc.github.io/microservice%20modeling/Event-Storming/)
 
@@ -517,23 +514,6 @@ Adapters는 domain과 interfaces 사이의 번역기 역할을 수행합니다.
 > [스프링 코드로 이해하는 핵사고날 아키텍처](https://covenant.tistory.com/258)    
 > [[Hexagonal Architecture] 헥사고날 아키텍처로 어떻게 유지.보수 가능한 소프트웨어를 개발할까?](https://velog.io/@msung99/Hexagonal-Architecture-%ED%97%A5%EC%82%AC%EA%B3%A0%EB%82%A0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EB%A1%9C-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9C%A0%EC%A7%80.%EB%B3%B4%EC%88%98-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%EB%A5%BC-%EA%B0%9C%EB%B0%9C%ED%95%A0%EA%B9%8C)  
 > [[Hexagonal Architecture] 헥사고날 아키텍처에서 유즈케이스(UserCase) 구현하기](https://velog.io/@msung99/Hexagonal-Architecture-%ED%97%A5%EC%82%AC%EA%B3%A0%EB%82%A0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EC%97%90%EC%84%9C-%EC%9C%A0%EC%A6%88%EC%BC%80%EC%9D%B4%EC%8A%A4UserCase-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)  
-  
-> 
-> TODO
-> [[Hexagonal Architecture] 헥사고날 아키텍처에서 인커밍 웹 어댑터(Adapter) 를 컨트롤러로 구현하기](https://velog.io/@msung99/Hexagonal-Architecture-%ED%97%A5%EC%82%AC%EA%B3%A0%EB%82%A0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EC%97%90%EC%84%9C-%EC%9D%B8%EC%BB%A4%EB%B0%8D-%EC%96%B4%EB%8C%91%ED%84%B0Adapter-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)    
-> [지속 가능한 소프트웨어 설계 패턴: 포트와 어댑터 아키텍처 적용하기](https://engineering.linecorp.com/ko/blog/port-and-adapter-architecture)    
-> [[Hexagonal Architecture] 1. 헥사고날 아키텍처란?](https://blog.jiniworld.me/176)    
-> [<Architecture> 헥사고날 아키텍처 구조로 변경해보기 예제](https://willbfine.tistory.com/599)    
-> [헥사고날 아키텍처(Hexagonal Architecture)](https://zkdlu.tistory.com/4)    
-
----
-
-## 테스트
-### 단위테스트
-> 
-
-### 통합테스트
-> 
 
 ---
 
