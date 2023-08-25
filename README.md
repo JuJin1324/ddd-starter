@@ -655,3 +655,24 @@ Adapters는 domain과 interfaces 사이의 번역기 역할을 수행합니다.
 > 
 > 하지만 이 방법에도 문제점은 있다. 설정 클래스가 생성하는 빈이 설정 클래스와 같은 패키지에 존재하지 않는다면 이 빈의 클래스를 public 으로 만들어야 한다.  
 > 가시성을 제한하기 위해 패키지를 모듈 경계로 사용하고 각 패키지 안에 전용 설정 클래스를 만들 수는 있다. 하지만 이렇게 하면 하위 패키지를 사용할 수 없다.  
+
+---
+
+## 의존성 방향 강제
+### ArchUnit
+> 패키지 밖에 노출하지 않기를 바라는 클래스들이 있다. 예를 들어 application 영역에서 Service 클래스들은 외부에서 직접 사용되지 않고 유스케이스를 통해서만
+> 사용되어야하기 때문에 Service 클래스들을 package-private 으로 접근제한하고 싶다.  
+> 하지만 application 패키지 아래 모든 클래스들을 넣는 경우가 아니고 application.service 와 같이 하위 패키지로 구분하게 되고 
+> 그 안에 Service 클래스들을 package-private 로 넣게되면 상위 패키지인 <도메인 명>.config 패키지에 있는 설정 클래스에서 Service 클래스에 접근할 수가 없어져서
+> 유스케이스를 Bean 으로 등록할 수가 없어진다. 그래서 클래스패스 스캐닝 방식을 사용하지 않고 스프링의 자바 컨피그로 조립하는 방식에서는 
+> Service 클래스를 package-private 으로 설정하는 것은 사실 상 불가능하다.  
+> 
+> 그래서 package-private 접근제한자를 통한 컴퍼일 단계의 체크가 아닌 컴파일 후 테스트 단계에서 체크하도록 한다.  
+> `ArchUnit` 라이브러리를 사용한다.  
+> ArchUnit 은 의존성 방향이 기대한 대로 잘 설정돼 있는지 체크할 수 있는 API 를 제공한다. 의존성 규칙 위반을 발견하면 예외를 던진다.  
+
+### Dependencies
+> ```groovy
+> testImplementation 'com.tngtech.archunit:archunit-junit5:1.1.0'
+> ```
+
