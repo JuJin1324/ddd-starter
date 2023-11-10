@@ -460,8 +460,8 @@ Adapters는 domain과 interfaces 사이의 번역기 역할을 수행합니다.
 > 응용 프로그램에 다른 데이터베이스가 필요한 경우 이전 것과 동일한 Outbound 포트 인터페이스를 구현하는 새 영속성 어댑터를 추가합니다.  
 > 
 > 어댑터는 크게 2종류로 구분됩니다.  
-> * Driving Adapter : 애플리케이션의 코어(도메인, 엔티티등) 을 호출하는 엔티티. 즉 웹 어댑터가 이에 해당합니다.  
-> * Driven Adapter : 애플리케이션에 의해 주도되는 어댑터들입니다. 즉 영속성 어댑터가 이에 해당하죠.  
+> * Driving Adapter : 애플리케이션의 코어(도메인, 엔티티등) 을 호출하는 엔티티. 즉 웹 어댑터가 이에 해당합니다.(Inbound Adapter)    
+> * Driven Adapter : 애플리케이션에 의해 주도되는 어댑터들입니다. 즉 영속성 어댑터가 이에 해당하죠. (Outbound Adapter)  
 > 
 > [[Hexagonal Architecture] 헥사고날 아키텍처에서 인커밍 웹 어댑터(Adapter) 를 컨트롤러로 구현하기](https://velog.io/@msung99/Hexagonal-Architecture-%ED%97%A5%EC%82%AC%EA%B3%A0%EB%82%A0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EC%97%90%EC%84%9C-%EC%9D%B8%EC%BB%A4%EB%B0%8D-%EC%96%B4%EB%8C%91%ED%84%B0Adapter-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
 > 
