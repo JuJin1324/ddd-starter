@@ -339,10 +339,10 @@
 > 같은 은행이면 수수료가 면제된다는 규칙(Business Rule)은 외부 상황(outer layer)을 전혀 모릅니다.  
 > 즉, Entity들은 outer layer들에 속한 다른 class나 component들을 전혀 모르고 신경쓰지 않아도 됩니다.  
 > 
-> **Use cases**  
-> Use cases는 특정 application에 대한 Business Rule입니다. Use cases는 시스템이 어떻게 자동화 될 것인지에 대해 정의하고 application의 행위를 결정합니다. 
-> 다시 말해, 프로젝트 레벨의 Business Rules(Entities)을 사용하여 Use cases의 목적을 달성합니다.  
-> 계좌 송금을 하기 위한 Use cases의 예시는 다음과 같습니다.  
+> **Usecases**  
+> Usecases는 특정 application에 대한 Business Rule입니다. Usecases는 시스템이 어떻게 자동화 될 것인지에 대해 정의하고 application의 행위를 결정합니다. 
+> 다시 말해, 프로젝트 레벨의 Business Rules(Entities)을 사용하여 Usecases의 목적을 달성합니다.  
+> 계좌 송금을 하기 위한 Usecases의 예시는 다음과 같습니다.  
 > [계좌 송금]  
 > * 입력: 수취인 계좌번호, 수취인 은행, 송금 금액
 > * 출력: 송금 성공 여부
@@ -352,13 +352,13 @@
 > 송금 금액은 1회에 1천만원까지만 허용된다.  
 > ...  
 > 
-> Use cases 는 Entities에 의존하는 동시에 상호작용합니다. 물론 outer layer에 대해서는 아는게 없습니다. 
+> Usecases 는 Entities에 의존하는 동시에 상호작용합니다. 물론 outer layer에 대해서는 아는게 없습니다. 
 > 다만 이 계층에서는 outer layer에서 사용할 수 있는 abstract class나 interface를 정의합니다.  
 > 
 > **Adapters**  
 Adapters는 domain과 interfaces 사이의 번역기 역할을 수행합니다.
-> 예를 들어 GUI로부터 input data를 받아 Use cases와 Entities 에게 편리한 형태로 repackage 하고, 
-> Use cases와 Entities의 output을 가져와 GUI에 표시하거나 DB에 저장하기 편리한 형식으로 repackage 합니다.  
+> 예를 들어 GUI로부터 input data를 받아 Usecases와 Entities 에게 편리한 형태로 repackage 하고, 
+> Usecases와 Entities의 output을 가져와 GUI에 표시하거나 DB에 저장하기 편리한 형식으로 repackage 합니다.  
 > Adapters는 GUI의 MVC 아키텍처를 완전히 내포하며, `Presenter`, `View`, `Controller` 가 모두 여기에 속합니다.  
 >  
 > **Infrastructure**  
@@ -433,7 +433,7 @@ Adapters는 domain과 interfaces 사이의 번역기 역할을 수행합니다.
 > **Domain Objects**  
 > 비즈니스 규칙이 풍부한 도메인에서 도메인 객체는 애플리케이션의 생명입니다. 도메인 객체는 상태(state)와 동작(behavior)을 모두 포함할 수 있습니다. 
 > 동작과 상태가 가까이 있을수록 코드를 더 쉽게 이해하고 유추하고 유지 관리할 수 있습니다.  
-> 도메인 객체에는 외부로 향하는 종속성이 없습니다. 그것들은 순수한 코드 덩어리이며 유즈 케이스가 도메인 객체를 조작(operate)할 수 있도록 API를 제공합니다.  
+> 도메인 객체에는 외부로 향하는 종속성이 없습니다. 그것들은 순수한 코드 덩어리이며 유즈케이스가 도메인 객체를 조작(operate)할 수 있도록 API를 제공합니다.  
 > 도메인 객체는 응용 프로그램의 다른 계층에 의존하지 않으므로 다른 계층의 변경 사항이 도메인 객체에 영향을 미치지 않습니다. 종속성 없이 발전할 수 있습니다. 
 > Single Responsibility Principle(“SOLID"의 “S”)의 대표적인 예입니다. 도메인 객체가 변경되는 이유는 비즈니스 요구 사항의 변경입니다.  
 > 단일 책임을 가짐으로써 외부 종속성을 고려할 필요 없이 도메인 객체를 발전시킬 수 있습니다. 이러한 발전 가능성은 도메인 주도 설계를 적용할 때 육각형 아키텍처 스타일을 
@@ -443,19 +443,19 @@ Adapters는 domain과 interfaces 사이의 번역기 역할을 수행합니다.
 > [[Hexagonal Architecture] 헥사고날 아키텍처에서 유즈케이스(UserCase) 구현하기](https://velog.io/@msung99/Hexagonal-Architecture-%ED%97%A5%EC%82%AC%EA%B3%A0%EB%82%A0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EC%97%90%EC%84%9C-%EC%9C%A0%EC%A6%88%EC%BC%80%EC%9D%B4%EC%8A%A4UserCase-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
 > 
 > **Inbound and Outbound Ports**  
-> 도메인 객체 및 유즈 케이스는 육각형 내에 있습니다. 즉, 애플리케이션의 핵심 내에 있습니다. 외부와의 모든 통신은 전용 "포트"를 통해 이루어집니다.    
-> Inbound 포트는 외부 구성 요소에서 호출할 수 있고 유즈 케이스에 의해 구현되는 간단한 인터페이스입니다. 이러한 Inbound 포트를 호출하는 구성 요소를 Inbound 어댑터라고 합니다.    
-> Outbound 포트는 외부에서 무언가가 필요한 경우(예: 데이터베이스 액세스), 유즈 케이스에서 호출할 수 있는 간단한 인터페이스입니다.   
-> 이 인터페이스는 유즈 케이스의 요구 사항에 맞게 설계되었지만 Outbound 어댑터라고 하는 외부 구성 요소에 의해 구현됩니다.     
-> SOLID 원칙에 익숙하다면 인터페이스를 사용하여 유즈 케이스에서 Outbound 어댑터로 종속성의 방향을 반전시키기 때문에 이것은 Dependency Inversion Principle(SOLID의 “D”)의 적용입니다.    
+> 도메인 객체 및 유즈케이스는 육각형 내에 있습니다. 즉, 애플리케이션의 핵심 내에 있습니다. 외부와의 모든 통신은 전용 "포트"를 통해 이루어집니다.    
+> Inbound 포트는 외부 구성 요소에서 호출할 수 있고 유즈케이스에 의해 구현되는 간단한 인터페이스입니다. 이러한 Inbound 포트를 호출하는 구성 요소를 Inbound 어댑터라고 합니다.    
+> Outbound 포트는 외부에서 무언가가 필요한 경우(예: 데이터베이스 액세스), 유즈케이스에서 호출할 수 있는 간단한 인터페이스입니다.   
+> 이 인터페이스는 유즈케이스의 요구 사항에 맞게 설계되었지만 Outbound 어댑터라고 하는 외부 구성 요소에 의해 구현됩니다.     
+> SOLID 원칙에 익숙하다면 인터페이스를 사용하여 유즈케이스에서 Outbound 어댑터로 종속성의 방향을 반전시키기 때문에 이것은 Dependency Inversion Principle(SOLID의 “D”)의 적용입니다.    
 > Inbound 및 Outbound 포트가 있으면, 데이터가 시스템에 들어오고 나가는 위치가 매우 뚜렷하므로 아키텍처에 대해 쉽게 추론할 수 있습니다.  
 > 
 > **Adapters**    
 > 어댑터는 육각형 아키텍처의 외부 레이어를 형성합니다. 어댑터들은 코어의 일부가 아니지만 코어와 상호작용합니다.  
 > Inbound 어댑터는 Inbound 포트를 호출하여 작업을 수행합니다. 예를 들어 Inbound 어댑터는 웹 인터페이스가 될 수 있습니다.   
-> 사용자가 브라우저에서 버튼을 클릭하면 웹 어댑터가 특정 Inbound 포트를 호출하여 해당 유즈 케이스를 호출합니다.  
-> Outbound 어댑터는 유즈 케이스에 따라 호출되며 예를 들어 데이터베이스의 데이터를 제공할 수 있습니다. Outbound 어댑터는 Outbound 포트 인터페이스의 집합을 구현합니다.   
-> 인터페이스는 유즈 케이스에 따라 결정되며 그 반대로 구현해서는 안됩니다.  
+> 사용자가 브라우저에서 버튼을 클릭하면 웹 어댑터가 특정 Inbound 포트를 호출하여 해당 유즈케이스를 호출합니다.  
+> Outbound 어댑터는 유즈케이스에 따라 호출되며 예를 들어 데이터베이스의 데이터를 제공할 수 있습니다. Outbound 어댑터는 Outbound 포트 인터페이스의 집합을 구현합니다.   
+> 인터페이스는 유즈케이스에 따라 결정되며 그 반대로 구현해서는 안됩니다.  
 > 어댑터를 사용하면 응용 프로그램의 특정 계층을 쉽게 교체할 수 있습니다. 응용 프로그램을 웹에 추가로 팻 클라이언트에서 사용할 수 있어야 하는 경우 팻 클라이언트 Inbound 어댑터를 추가합니다.   
 > 응용 프로그램에 다른 데이터베이스가 필요한 경우 이전 것과 동일한 Outbound 포트 인터페이스를 구현하는 새 영속성 어댑터를 추가합니다.  
 > 
