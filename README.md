@@ -508,13 +508,17 @@ Adapters는 domain과 interfaces 사이의 번역기 역할을 수행합니다.
 > 단순히 데이터를 저장하고 읽는 CRUD 애플리케이션을 구축하는 경우 이와 같은 아키텍처는 아마도 오버헤드일 것입니다.   
 > 하지만 상태와 동작을 결합하는 풍부한 도메인 모델로 표현할 수 있는 풍부한 비즈니스 규칙으로 애플리케이션을 구축하는 경우, 
 > 이 아키텍처는 도메인 모델을 요소들의 중심에 배치하기 때문에 정말 많은 효과를 볼 수 있을 겁니다.  
-> 
+>
 > **참조사이트**  
 > [헥사고날(Hexagonal) 아키텍처란 무엇인가?!](https://jaehoney.tistory.com/313)    
 > [DDD + Hexagonal Architecture(WITH 글로벌 프로젝트)](http://dev.blog.sellmate.co.kr/post/%EA%B8%80%EB%A1%9C%EB%B2%8C-5%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%A6%AC%EB%B7%B0/)    
 > [스프링 코드로 이해하는 핵사고날 아키텍처](https://covenant.tistory.com/258)    
 > [[Hexagonal Architecture] 헥사고날 아키텍처로 어떻게 유지.보수 가능한 소프트웨어를 개발할까?](https://velog.io/@msung99/Hexagonal-Architecture-%ED%97%A5%EC%82%AC%EA%B3%A0%EB%82%A0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EB%A1%9C-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9C%A0%EC%A7%80.%EB%B3%B4%EC%88%98-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%EB%A5%BC-%EA%B0%9C%EB%B0%9C%ED%95%A0%EA%B9%8C)  
 > [[Hexagonal Architecture] 헥사고날 아키텍처에서 유즈케이스(UserCase) 구현하기](https://velog.io/@msung99/Hexagonal-Architecture-%ED%97%A5%EC%82%AC%EA%B3%A0%EB%82%A0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EC%97%90%EC%84%9C-%EC%9C%A0%EC%A6%88%EC%BC%80%EC%9D%B4%EC%8A%A4UserCase-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)  
+
+### 흐름 정리
+> Inbound Adapter(Controller, Event Listener) -> Usecase(인터페이스) -> Inbound Port(Usecase 의 구현체) 
+> -> OutboundPort(인터페이스) -> Outbound Adapter(구현체)
 
 ---
 
