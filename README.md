@@ -440,7 +440,7 @@ Adapters는 domain과 interfaces 사이의 번역기 역할을 수행합니다.
 > 완벽하게 만들어줍니다. 개발하는 동안 우리는 종속성의 자연스러운 흐름을 따릅니다: 우리는 도메인 객체에서 코딩을 시작하고 거기에서 바깥쪽으로 나아갑니다.  
 > 
 > **Use Cases**  
-> [[Hexagonal Architecture] 헥사고날 아키텍처에서 유즈케이스(UserCase) 구현하기](https://velog.io/@msung99/Hexagonal-Architecture-%ED%97%A5%EC%82%AC%EA%B3%A0%EB%82%A0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EC%97%90%EC%84%9C-%EC%9C%A0%EC%A6%88%EC%BC%80%EC%9D%B4%EC%8A%A4UserCase-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
+> [[Hexagonal Architecture] 헥사고날 아키텍처에서 유즈케이스(UserCase) 구현하기](https://haon.blog/haon/architecture/hexagonal/usecase/)
 > 
 > **Inbound and Outbound Ports**  
 > 도메인 객체 및 유즈케이스는 육각형 내에 있습니다. 즉, 애플리케이션의 핵심 내에 있습니다. 외부와의 모든 통신은 전용 "포트"를 통해 이루어집니다.    
@@ -463,7 +463,7 @@ Adapters는 domain과 interfaces 사이의 번역기 역할을 수행합니다.
 > * Driving Adapter : 애플리케이션의 코어(도메인, 엔티티등) 을 호출하는 엔티티. 즉 웹 어댑터가 이에 해당합니다.(Inbound Adapter)    
 > * Driven Adapter : 애플리케이션에 의해 주도되는 어댑터들입니다. 즉 영속성 어댑터가 이에 해당하죠. (Outbound Adapter)  
 > 
-> [[Hexagonal Architecture] 헥사고날 아키텍처에서 인커밍 웹 어댑터(Adapter) 를 컨트롤러로 구현하기](https://velog.io/@msung99/Hexagonal-Architecture-%ED%97%A5%EC%82%AC%EA%B3%A0%EB%82%A0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EC%97%90%EC%84%9C-%EC%9D%B8%EC%BB%A4%EB%B0%8D-%EC%96%B4%EB%8C%91%ED%84%B0Adapter-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
+> [[Hexagonal Architecture] 헥사고날 아키텍처에서 인커밍 웹 어댑터(Adapter) 를 컨트롤러로 구현하기](https://haon.blog/haon/architecture/hexagonal/incoming/)
 > 
 > **접근 제한자**  
 > 패키지의 수가 아주 많아진다는 것이 모든 것을 public 으로 만들어서 패키지 간의 접근을 허용해야 한다는 것은 아닐까? 걱정스럽다.  
