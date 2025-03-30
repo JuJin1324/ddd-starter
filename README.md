@@ -27,6 +27,21 @@
 
 ---
 
+## 전술적 설계
+
+>
+
+### 핵심 개념
+
+> * 값 객체 (Value Object - VO)
+> * 엔티티 (Entity)
+> * 애그리거트 (Aggregate) & 애그리거트 루트 (Aggregate Root)
+> * 리포지토리 (Repository)
+> * 도메인 서비스 (Domain Service)
+> * 팩토리 (Factory)
+
+---
+
 ## 전략적 설계(Strategic Design)
 
 > "복잡한 도메인" 을 "관리 가능한 단위" 로 나누고, "각 단위 간의 관계" 를 정의하며, "팀 구조" 와 "개발 전략" 을 수립하는
@@ -36,56 +51,19 @@
 > 끊임없이 도메인을 탐구하고, 모델을 개선해 나가는 "반복적인 노력" 이 필요하지!
 
 ### 핵심 개념
+
 > * 도메인 (Domain) & 하위 도메인 (Subdomain): 문제 영역 분석
 > * Bounded Context (바운디드 컨텍스트): 모델 경계 설정
 > * 유비쿼터스 랭귀지 (Ubiquitous Language): 공통 언어 구축
 > * 컨텍스트 맵 (Context Map): 관계 정의 및 시각화
+> * 다양한 관계 패턴 (Partnership, Shared Kernel, Customer-Supplier, Conformist, ACL, OHS, Published Language, Separate Ways)
 
 ---
 
-## 전술적 설계
-
->
-
-### 애그리거트 루트
-
->
-
-### 엔티티(Entity)
-
->
-
-### 값 객체(Value Object)
-
->
-
-### 애그리거트(Aggregate)
-
->
-
-### 애그리거트 루트(Aggregate root)
-
->
-
-### 리포지토리(Repository)
-
->
-
-### 모듈(Module)
-
->
-
-### 도메인 서비스
-
->
-
-### 팩토리
-
->
-
-### 도메인 이벤트
-
->
+## 심화 개념
+> * 도메인 이벤트 (Domain Event)
+> * 모듈 (Module)
+> * 애플리케이션 서비스(Application Service)
 
 ---
 
