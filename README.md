@@ -27,9 +27,13 @@
 
 ---
 
-## 전술적 설계
+## 전술적 설계(Tactical Design)
 
->
+> "개별 Bounded Context 내부" 에서 "도메인 모델" 을 구체적인 "객체 (Object)" 와 "클래스 (Class)" 로 어떻게 구현할 것인가에 대한 "세부적인 설계 기법" 들을 다루는 영역
+> 핵심 목표:
+> * 풍부하고 표현력 있는 도메인 모델 구축: 도메인 전문가의 언어 (유비쿼터스 랭귀지) 를 코드로 정확하게 표현하고, 도메인의 복잡성을 잘 담아내는 모델을 만드는 것.
+> * 견고하고 유지보수하기 쉬운 코드 작성: 객체지향 원칙 (캡슐화, 단일 책임 원칙 등) 을 잘 지키고, 응집도는 높고 결합도는 낮은 코드를 만드는 것.
+> * 테스트 용이성 확보: 도메인 로직을 외부 의존성 없이 쉽게 테스트할 수 있도록 설계하는 것.
 
 ### 핵심 개념
 
@@ -38,6 +42,7 @@
 > * 애그리거트 (Aggregate) & 애그리거트 루트 (Aggregate Root)
 > * 리포지토리 (Repository)
 > * 도메인 서비스 (Domain Service)
+> * 도메인 이벤트 (Domain Event)
 > * 팩토리 (Factory)
 
 ---
@@ -61,6 +66,7 @@
 ---
 
 ## 심화 개념
+
 > * 도메인 이벤트 (Domain Event)
 > * 모듈 (Module)
 > * 애플리케이션 서비스(Application Service)
@@ -69,20 +75,24 @@
 
 ## 구현 아키텍처
 
-### Layered 아키텍처
+> 핵심 원칙: 이 아키텍처들은 모두 "도메인 모델을 시스템의 핵심에 두고 보호" 하고, "관심사를 명확하게 분리" 하며, "의존성 역전 원칙 (DIP)" 을 활용하여 "계층 간 결합도를 낮추는 것" 을 목표로 해!
 
+### 종류
+
+> * 계층형 아키텍처(Layered Architecture)
+> * 헥사고날 아키텍처(Hexagonal Architecture)
+> * 클린 아키텍처(Clean Architecture)
+> * 양파 아키텍처(Onion Architecture)
+
+### CQRS(Command Query Responsibility Segregation) 패턴
+
+> CQRS 는 말 그대로 "명령 (Command)" 과 "조회 (Query)" 의 "책임 (Responsibility)" 을 "분리 (Segregation)" 하는 아키텍처 패턴이야.
+> * Command (명령): 시스템의 상태를 변경하는 모든 작업 (예: 생성, 수정, 삭제). "Write" 작업에 해당.
+> * Query (조회): 시스템의 상태를 읽는 모든 작업. "Read" 작업에 해당. 상태를 변경하지 않음!
 >
-
-### Clean 아키텍처
-
+> 핵심 아이디어: "상태를 변경하는 책임" 과 "상태를 조회하는 책임" 을 완전히 다른 모델과 경로로 처리하자는 거야. 하나의 모델로 두 가지 책임을 모두 감당하려고 하면 모델이 복잡해지고, 각 책임에 최적화하기
+> 어렵다는 문제의식에서 출발했어.
 >
-
-### Hexagonal 아키텍처
-
->
-
----
-
-## CQRS(Command Query Responsibility Segregation) 패턴
-
-> 
+> Eventual Consistency    
+> 핵심 개념: 시스템에 새로운 변경 사항 (Update) 이 더 이상 발생하지 않는다면, 일정 시간이 지난 후에는 모든 복제본 (Replica) 이 결국 (Eventually) 동일한 값으로 수렴 (
+> Converge) 하는 것을 보장한다.
