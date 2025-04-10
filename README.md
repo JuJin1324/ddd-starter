@@ -67,9 +67,20 @@
 
 ## 심화 개념
 
-> * 도메인 이벤트 (Domain Event)
-> * 모듈 (Module)
-> * 애플리케이션 서비스(Application Service)
+### 도메인 이벤트 (Domain Event)
+
+> Domain Event (도메인 이벤트) 는 "도메인에서 발생한 의미 있는 사건 (Significant Occurrence)" 을 나타내는 "과거 시제의 사실 (Fact)"
+> 핵심 아이디어: 어떤 중요한 일 (상태 변경, 행위 완료 등) 이 "발생했다" 는 사실 자체를 모델링하고, 이 "사건" 정보를 시스템의 다른 부분에 "전파 (Propagate)" 또는 "발행 (Publish)"
+> 하는 거야.
+>
+
+### 모듈 (Module)
+
+>
+
+### 애플리케이션 서비스(Application Service)
+
+>
 
 ---
 
